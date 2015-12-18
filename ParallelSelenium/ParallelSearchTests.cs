@@ -45,7 +45,8 @@ namespace ParallelSelenium
             iProxy.UseDefaultCredentials = true;
             iProxy.Credentials = new NetworkCredential("test", "hello123");
             WebRequest.DefaultWebProxy = iProxy;
-            */        
+            */
+            String seleniumUri = "http://{0}:{1}/wd/hub";
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.SetCapability(CapabilityType.BrowserName, browser);
             capabilities.SetCapability(CapabilityType.Version, version);
@@ -54,7 +55,21 @@ namespace ParallelSelenium
             capabilities.SetCapability("deviceOrientation", deviceOrientation);
             //Sauce Connect setup.
             //Requires a named tunnel.
-            //capabilities.SetCapability("tunnelIdentifier", "hello");
+            if (Constants.tunnelId != null)
+            {
+                capabilities.SetCapability("tunnel-identifier", Constants.tunnelId);
+            }
+            if(Constants.buildTag != null)
+            {
+                capabilities.SetCapability("build", Constants.buildTag);
+            }
+            if(Constants.seleniumRelayPort != null)
+            {
+                seleniumUri = String.Format(seleniumUri, "localhost", Constants.seleniumRelayPort);
+            } else
+            {
+                seleniumUri = "http://ondemand.saucelabs.com:80/wd/hub";
+            }
             capabilities.SetCapability("username", Constants.sauceUser);
             capabilities.SetCapability("accessKey", Constants.sauceKey);
             capabilities.SetCapability("name", 
@@ -62,7 +77,7 @@ namespace ParallelSelenium
             TestContext.CurrentContext.Test.ClassName,
             TestContext.CurrentContext.Test.MethodName,
             TestContext.CurrentContext.Test.Properties.Get("Description")));
-            driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabilities, TimeSpan.FromSeconds(600));
+            driver = new RemoteWebDriver(new Uri(""), capabilities, TimeSpan.FromSeconds(600));
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
         }
 
