@@ -13,6 +13,7 @@ namespace ParallelSelenium
         internal static string tunnelId = Environment.GetEnvironmentVariable("TUNNEL_IDENTIFIER");
         internal static string seleniumRelayPort = Environment.GetEnvironmentVariable("SELENIUM_PORT");
         internal static string buildTag = Environment.GetEnvironmentVariable("BUILD_TAG");
+        internal static string seleniumRelayHost = Environment.GetEnvironmentVariable("SELENIUM_HOST");
 
     }
 }

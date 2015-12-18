@@ -63,11 +63,10 @@ namespace ParallelSelenium
             {
                 capabilities.SetCapability("build", Constants.buildTag);
             }
-            if(Constants.seleniumRelayPort != null)
+            if(Constants.seleniumRelayPort != null && Constants.seleniumRelayHost != null)
             {
-                seleniumUri = String.Format(seleniumUri, "localhost", Constants.seleniumRelayPort);
-            } else
-            {
+                seleniumUri = String.Format(seleniumUri, Constants.seleniumRelayHost, Constants.seleniumRelayPort);
+            } else {
                 seleniumUri = "http://ondemand.saucelabs.com:80/wd/hub";
             }
             capabilities.SetCapability("username", Constants.sauceUser);
