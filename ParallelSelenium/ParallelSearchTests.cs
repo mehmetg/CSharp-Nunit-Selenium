@@ -77,7 +77,7 @@ namespace ParallelSelenium
             TestContext.CurrentContext.Test.ClassName,
             TestContext.CurrentContext.Test.MethodName,
             TestContext.CurrentContext.Test.Properties.Get("Description")));
-            driver = new RemoteWebDriver(new Uri(seleniumUri), capabilities, TimeSpan.FromSeconds(600));
+            driver = new CustomRemoteWebDriver(new Uri(seleniumUri), capabilities, TimeSpan.FromSeconds(600));
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
         }
 

@@ -10,7 +10,7 @@ namespace ParallelSelenium.Utils
 {
     class CustomRemoteWebDriver : RemoteWebDriver
     {
-        public CustomRemoteWebDriver(Uri uri, DesiredCapabilities capabilities) : base(uri, capabilities){}
+        public CustomRemoteWebDriver(Uri uri, DesiredCapabilities capabilities, TimeSpan commandTimeout) : base(uri, capabilities, commandTimeout){}
 
         public SessionId getSessionId()
         {
