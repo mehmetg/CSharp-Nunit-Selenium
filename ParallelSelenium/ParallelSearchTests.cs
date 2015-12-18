@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using NUnit.Framework;
 using ParallelSelenium.PageObjects.Bing;
+using ParallelSelenium.Utils;
 
 namespace ParallelSelenium
 {
@@ -115,6 +116,7 @@ namespace ParallelSelenium
             }
             finally
             {
+                Console.WriteLine(String.Format("SauceOnDemandSessionID={0} job-name={1}", ((CustomRemoteWebDriver)driver).getSessionId(), TestContext.CurrentContext.Test.MethodName));
                 // Terminates the remote webdriver session
                 driver.Quit();
             }
